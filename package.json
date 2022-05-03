@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Brand new Discord bot for you and your Discord server",
   "main": "./src/index.js",
+  "type": "module",
   "scripts": {
     "dev": "nodemon ./src/index.js",
     "start": "node ./src/index.js"
