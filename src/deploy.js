@@ -8,13 +8,14 @@ And so on. You need to install modules by this command => npm install @discordjs
 import { Collection } from "discord.js";
 import { REST } from "@discordjs/rest";
 import { Routes } from "discord-api-types/v9";
+import { resolve } from 'path';
 import fs from 'fs';
 
 // Import config
 import config from './files/config.json' assert { type: 'json' };
 
 // Create new function
-async function deploy(client, type = 'server') {
+async function deploy(client, type = 'global') {
     client.commands = new Collection();
 
     // Fetch commands
@@ -22,8 +23,8 @@ async function deploy(client, type = 'server') {
 
     // Upload commands to collection
     for (const file of files) {
-        const command = await import(`./commands/${file}`);
-        client.commands.set(command.default.data.name, command);
+        const command = (await import(`file://${resolve('./src/commands', file)}`)).default;
+        client.commands.set(command.data.name, command);
     }
 
     // Create new array
@@ -31,7 +32,7 @@ async function deploy(client, type = 'server') {
 
     // Push all commands to array
     client.commands.forEach(cmd => {
-        commands.push(cmd.default.data);
+        commands.push(cmd.data);
     });
 
     // Create new REST
@@ -39,13 +40,15 @@ async function deploy(client, type = 'server') {
 
     console.log(`\x1b[38;5;49m[🔄  | Slash commands] | Started updating slash commands.\x1B[0m`);
     // Upload slash commands
-        if (type === 'server') {
+    try {
+        if (type === 'guild') {
             await rest.put(
-                Routes.applicationGuildCommands('970968773232312320', config.guildID),
+                Routes.applicationGuildCommands(client.user.id, config.guildID),
                 {
                     body: commands
                 },
             );
+            console.log(`\x1b[38;5;49m[✅  | Slash commands] | Guild commands successfull uploaded.\x1B[0m`);
         } else if (type === 'global') {
             await rest.put(
                 Routes.applicationCommands(clientID),
@@ -53,9 +56,13 @@ async function deploy(client, type = 'server') {
                     body: commands
                 },
             );
+            console.log(`\x1b[38;5;49m[✅  | Slash commands] | Global commands successfull uploaded.\x1B[0m`);
         } else {
-            console.log(`\x1b[38;5;197m[❌  | Slash commands] Enter correct type.\x1B[0m`);
+            console.log(`\x1b[38;5;197m[🤔  | Slash commands] Enter correct type.\x1B[0m`);
         }
+    } catch (err) {
+        console.log(`\x1b[38;5;197m[❌  | Slash commands] Error.\x1B[0m\n${err}`);
+    }
 }
 
 export default deploy;

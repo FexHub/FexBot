@@ -1,7 +1,7 @@
 // Import modules
 import { SlashCommandBuilder } from '@discordjs/builders';
 import { MessageEmbed } from "discord.js";
-import * as fetch from "node-fetch";
+import fetch from "node-fetch";
 
 // Create new slash command
 export default {
@@ -14,7 +14,7 @@ export default {
         let ping;
 
         // Fetch Discord API latency
-        await fetch('https://discordstatus.com/metrics-display/ztt4777v23lf/day.json').then(async r => {
+        await fetch('https://discordstatus.com/metrics-display/5k2rt9f7pmny/day.json').then(async r => {
             ping = (await r.json()).summary.last;
         });
 
