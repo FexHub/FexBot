@@ -1,7 +1,7 @@
 {
   "name": "fexbot",
   "version": "1.0.0",
-  "description": "Brand new Discord bot for you and your Discord server",
+  "description": "Brand new Discord bot. By FexHub.",
   "main": "./src/index.js",
   "type": "module",
   "scripts": {

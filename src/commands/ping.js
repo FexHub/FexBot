@@ -18,13 +18,13 @@ export default {
             ping = (await r.json()).summary.last;
         });
 
-        // Send message
+        // Send embed message
         await interaction.reply({
             embeds: [
                 new MessageEmbed()
-                .setAuthor(interaction.user.username, interaction.user.displayAvatarURL({ format: 'png', size: 2048, dynamic: true }))
-					.setColor('68ff00')
-					.setDescription(`**🏓 Pong!**\n**Client latency: \`${interaction.client.ws.ping} ms\`**\n**Discord API latency: \`${ping} ms\`**`)
+                    .setAuthor({ name: interaction.user.username, iconURL: interaction.user.displayAvatarURL({ format: 'png', size: 2048, dynamic: true }) })
+                    .setColor('68ff00')
+                    .setDescription(`**🏓 Pong!**\n**Client latency: \`${interaction.client.ws.ping} ms\`**\n**Discord API latency: \`${ping} ms\`**`)
             ]
         })
     }

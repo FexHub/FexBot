@@ -1,6 +1,6 @@
 /*
 This file uses in ready event for deploy your new slash commands
-Note: Remember to change your token and (if you need) guild ID(s) in config.json
+Note: Remember to change your token and (if you need) guild ID in config.json
 And so on. You need to install modules by this command => npm install @discordjs/builders @discordjs/rest discord-api-types
 */
 
@@ -51,7 +51,7 @@ async function deploy(client, type = 'global') {
             console.log(`\x1b[38;5;49m[✅  | Slash commands] | Guild commands successfull uploaded.\x1B[0m`);
         } else if (type === 'global') {
             await rest.put(
-                Routes.applicationCommands(clientID),
+                Routes.applicationCommands(client.user.id),
                 {
                     body: commands
                 },
