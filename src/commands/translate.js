@@ -13,6 +13,7 @@ export default {
                 .setDescription('Text to translate')
                 .setRequired(true)),
     async execute(interaction) {
+        // Send embed message
         const reply = await interaction.reply({
             embeds: [
                 new MessageEmbed()
@@ -67,7 +68,7 @@ export default {
                                     description: 'Translate to Arabic',
                                     value: 'ar',
                                     emoji: '🇦🇪'
-                                }, 
+                                },
                                 {
                                     label: 'German',
                                     description: 'Translate to German',
@@ -85,12 +86,15 @@ export default {
             ], fetchReply: true
         });
 
-
+        // Filter
         const filter = (int) => int.user.id === interaction.user.id;
 
+        // Create collector
         const collector = reply.createMessageComponentCollector({ filter, max: 1 });
         collector.on('collect', async (i) => {
+            // Translate text
             const translated = await translate(interaction.options.getString('text'), { to: i.values[0] }).then(res => res.text);
+            // Edit embed message
             await interaction.editReply({
                 embeds: [
                     new MessageEmbed()

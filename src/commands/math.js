@@ -20,7 +20,7 @@ export default {
         try {
             await fetch(`https://api.mathjs.org/v4/?expr=${encodeURIComponent(interaction.options.getString('expression'))}`).then(async res => result = await res.text());
         } catch (err) {
-            console.log(`\x1b[38;5;197m[❌  | Logs] | User ${interaction.user.username} caught error in command \x1b[36m${interaction.commandName}.\x1B[0m\n${error}`)
+            console.log(`\x1b[38;5;197m[❌  | Logs] | User ${interaction.user.username} caught error in command \x1b[36m${interaction.commandName}.\x1B[0m\n${error}`);
         }
 
         // Send embed message
