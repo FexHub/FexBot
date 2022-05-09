@@ -29,30 +29,66 @@ export default {
                                 {
                                     label: 'Belarusian',
                                     description: 'Translate to Belarusian',
-                                    value: "be",
-                                    emoji: "🇧🇾"
+                                    value: 'be',
+                                    emoji: '🇧🇾'
                                 },
                                 {
                                     label: 'Ukrainian',
                                     description: 'Translate to Ukrainian',
-                                    value: "uk",
-                                    emoji: "🇺🇦",
+                                    value: 'uk',
+                                    emoji: '🇺🇦',
                                 },
                                 {
                                     label: 'Polish',
                                     description: 'Translate to Polish',
-                                    value: "pl",
-                                    emoji: "🇵🇱"
+                                    value: 'pl',
+                                    emoji: '🇵🇱'
+                                },
+                                {
+                                    label: 'Russian',
+                                    description: 'Translate to Russian',
+                                    value: 'ru',
+                                    emoji: '🇷🇺'
+                                },
+                                {
+                                    label: 'Chinese',
+                                    description: 'Translate to Chinese',
+                                    value: 'zh-TW',
+                                    emoji: '🇨🇳'
+                                },
+                                {
+                                    label: 'Japanese',
+                                    description: 'Translate to Japanese',
+                                    value: 'ja',
+                                    emoji: '🇯🇵'
+                                },
+                                {
+                                    label: 'Arabic',
+                                    description: 'Translate to Arabic',
+                                    value: 'ar',
+                                    emoji: '🇦🇪'
+                                }, 
+                                {
+                                    label: 'German',
+                                    description: 'Translate to German',
+                                    value: 'de',
+                                    emoji: '🇩🇪'
+                                },
+                                {
+                                    label: 'English',
+                                    description: 'Translate to English',
+                                    value: 'en',
+                                    emoji: '🇺🇸'
                                 }
                             ])
                     )
             ], fetchReply: true
         });
 
-        // const filter = (interaction) => interaction.user.id === interaction.message.author.id;
-        // const collector = reply.createMessageComponentCollector({ filter, max: 1 });
 
-        const collector = reply.createMessageComponentCollector({ max: 1 });
+        const filter = (int) => int.user.id === interaction.user.id;
+
+        const collector = reply.createMessageComponentCollector({ filter, max: 1 });
         collector.on('collect', async (i) => {
             const translated = await translate(interaction.options.getString('text'), { to: i.values[0] }).then(res => res.text);
             await interaction.editReply({
