@@ -17,7 +17,7 @@ client.once("ready", async () => {
 
 // Interaction created event
 client.on("interactionCreate", async (interaction) => {
-    if(interaction.isAutocomplete()) autocomplete(interaction);
+    if (interaction.isAutocomplete()) autocomplete(interaction);
     if (!interaction.isCommand()) return;
 
     const command = client.commands.get(interaction.commandName);

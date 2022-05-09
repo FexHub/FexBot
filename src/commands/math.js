@@ -29,7 +29,10 @@ export default {
                 new MessageEmbed()
                     .setAuthor({ name: interaction.user.username, iconURL: interaction.user.displayAvatarURL({ format: 'png', size: 2048, dynamic: true }) })
                     .setColor('68ff00')
-                    .setDescription(`**${interaction.options.getString('expression')}** = \`${result}\``)
+                    .addFields(
+                        { name: '🧮 Expression', value: `**\`${interaction.options.getString('expression')}\`**`, inline: true },
+                        { name: '📈 Result', value: `**\`${result}\`**`, inline: true }
+                    )
             ]
         })
     }

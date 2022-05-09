@@ -58,10 +58,10 @@ async function deploy(client, type = 'global') {
             );
             console.log(`\x1b[38;5;49m[✅  | Slash commands] | Global commands successfull uploaded.\x1B[0m`);
         } else {
-            console.log(`\x1b[38;5;197m[🤔  | Slash commands] Enter correct type.\x1B[0m`);
+            console.log(`\x1b[38;5;197m[🤔  | Slash commands] | Enter correct type.\x1B[0m`);
         }
     } catch (err) {
-        console.log(`\x1b[38;5;197m[❌  | Slash commands] Error.\x1B[0m\n${err}`);
+        console.log(`\x1b[38;5;197m[❌  | Slash commands] | Error.\x1B[0m\n${err}`);
     }
 }
 
