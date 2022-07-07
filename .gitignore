@@ -1,2 +1,4 @@
 node_modules
 src/logs/**
+src/files/**
+.idea

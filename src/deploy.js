@@ -19,7 +19,7 @@ async function deploy(client, type = 'global') {
     client.commands = new Collection();
 
     // Fetch commands
-    const files = await fs.readdirSync('./src/commands').filter(file => file.endsWith('.js'));
+    const files = fs.readdirSync('./src/commands').filter(file => file.endsWith('.js'));
 
     // Upload commands to collection
     for (const file of files) {

@@ -27,7 +27,7 @@ export default {
             embeds: [
                 new MessageEmbed()
                     .setAuthor({ name: interaction.user.username, iconURL: interaction.user.displayAvatarURL({ format: 'png', size: 2048, dynamic: true }) })
-                    .setColor('68ff00')
+                    .setColor('#68ff00')
                     .setTitle(result.weather[0].main)
                     .addFields(
                         { name: '🌡️ Temperature', value: `**\`${result.main.temp}°C\`**`, inline: true },

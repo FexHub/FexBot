@@ -18,7 +18,7 @@ export default {
             embeds: [
                 new MessageEmbed()
                     .setAuthor({ name: interaction.user.username, iconURL: interaction.user.displayAvatarURL({ format: 'png', size: 2048, dynamic: true }) })
-                    .setColor('68ff00')
+                    .setColor('#68ff00')
                     .setDescription('**🗺️ Select language**')
             ], components: [
                 new MessageActionRow()
@@ -99,13 +99,13 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setAuthor({ name: interaction.user.username, iconURL: interaction.user.displayAvatarURL({ format: 'png', size: 2048, dynamic: true }) })
-                        .setColor('68ff00')
+                        .setColor('#68ff00')
                         .addFields(
                             {
-                                name: '📜 Text', value: `**\`${interaction.options.getString('text')}\`**`, inline: true
+                                inline: true, name: '📜 Text', value: `**\`${interaction.options.getString('text')}\`**`
                             },
                             {
-                                name: '🗺️ Translated text', value: `**\`${translated}\`**`, inline: true
+                                inline: true, name: '🗺️ Translated text', value: `**\`${translated}\`**`
                             }
                         )
                 ], components: []

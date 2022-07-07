@@ -8,19 +8,19 @@ export default {
         .setName('wallet')
         .setDescription('Get info about crypto wallet')
         .addStringOption(option =>
-            option.setName('adress')
-                .setDescription('Crypto adress')
+            option.setName('address')
+                .setDescription('Crypto address')
                 .setRequired(true)),
     async execute(interaction) {
-        // Create new variables for wallet info, adress and transactions
-        let wallet, adress, transactions;
+        // Create new variables for wallet info, address and transactions
+        let wallet, address, transactions;
 
         // Send embed message
         const reply = await interaction.reply({
             embeds: [
                 new MessageEmbed()
                     .setAuthor({ name: interaction.user.username, iconURL: interaction.user.displayAvatarURL({ format: 'png', size: 2048, dynamic: true }) })
-                    .setColor('68ff00')
+                    .setColor('#68ff00')
                     .setDescription('**👛 Select blockchain**')
 
             ], components: [
@@ -37,15 +37,6 @@ export default {
                                     emoji: {
                                         name: 'bitcoin',
                                         id: '973665330771664928'
-                                    }
-                                },
-                                {
-                                    label: 'ETH',
-                                    description: 'Select Ethereum',
-                                    value: 'ethereum',
-                                    emoji: {
-                                        name: 'ethereum',
-                                        id: '973665331266588743'
                                     }
                                 },
                                 {
@@ -140,62 +131,63 @@ export default {
         // Create collector
         const collector = reply.createMessageComponentCollector({ filter, max: 1 });
         collector.on('collect', async (i) => {
-            adress = interaction.options.getString('adress');
+            address = interaction.options.getString('address');
             // Fetch wallet info
             try {
-                await fetch(`https://api.blockchair.com/${i.values[0]}/dashboards/address/${adress}`).then(async res => wallet = await res.json());
+                wallet = await (await fetch(`https://api.blockchair.com/${i.values[0]}/dashboards/address/${address}`)).json();
             } catch (err) {
-                console.log(`\x1b[38;5;197m[❌  | Logs] | User ${interaction.user.username} caught error in command \x1b[36m${interaction.commandName}.\x1B[0m\n${error}`);
+                console.log(`\x1b[38;5;197m[❌  | Logs] | User ${interaction.user.username} caught error in command \x1b[36m${interaction.commandName}.\x1B[0m\n${err}`);
             }
-            if (wallet.data[adress].transactions[0] !== undefined) {
+            console.log(wallet.data)
+            if (wallet.data[address].transactions[0] !== undefined) {
                 // Fetch 1st transaction
-                await fetch(`https://api.blockchair.com/${i.values[0]}/dashboards/transaction/${wallet.data[adress].transactions[0]}`).then(async res => {
+                await fetch(`https://api.blockchair.com/${i.values[0]}/dashboards/transaction/${wallet.data[address].transactions[0]}`).then(async res => {
                     let trans1 = await res.json();
                     transactions = [
                         {
-                            block_id: `${trans1.data[wallet.data[adress].transactions[0]].transaction.block_id}`,
-                            amount: `${trans1.data[wallet.data[adress].transactions[0]].transaction.input_total / 100000000}`,
-                            amount_usd: `${trans1.data[wallet.data[adress].transactions[0]].transaction.input_total_usd}`,
-                            fee: `${trans1.data[wallet.data[adress].transactions[0]].transaction.fee}`,
+                            block_id: `${trans1.data[wallet.data[address].transactions[0]].transaction.block_id}`,
+                            amount: `${trans1.data[wallet.data[address].transactions[0]].transaction.input_total / 100000000}`,
+                            amount_usd: `${trans1.data[wallet.data[address].transactions[0]].transaction.input_total_usd}`,
+                            fee: `${trans1.data[wallet.data[address].transactions[0]].transaction.fee}`,
                         }
                     ]
-                    if (wallet.data[adress].transactions[1] !== undefined) {
+                    if (wallet.data[address].transactions[1] !== undefined) {
                         // Fetch 2nd transaction
-                        await fetch(`https://api.blockchair.com/${i.values[0]}/dashboards/transaction/${wallet.data[adress].transactions[1]}`).then(async res => {
+                        await fetch(`https://api.blockchair.com/${i.values[0]}/dashboards/transaction/${wallet.data[address].transactions[1]}`).then(async res => {
                             let trans2 = await res.json();
                             transactions = [
                                 ...transactions,
                                 {
-                                    block_id: `${trans2.data[wallet.data[adress].transactions[1]].transaction.block_id}`,
-                                    amount: `${trans2.data[wallet.data[adress].transactions[1]].transaction.input_total / 100000000}`,
-                                    amount_usd: `${trans2.data[wallet.data[adress].transactions[1]].transaction.input_total_usd}`,
-                                    fee: `${trans2.data[wallet.data[adress].transactions[1]].transaction.fee}`,
+                                    block_id: `${trans2.data[wallet.data[address].transactions[1]].transaction.block_id}`,
+                                    amount: `${trans2.data[wallet.data[address].transactions[1]].transaction.input_total / 100000000}`,
+                                    amount_usd: `${trans2.data[wallet.data[address].transactions[1]].transaction.input_total_usd}`,
+                                    fee: `${trans2.data[wallet.data[address].transactions[1]].transaction.fee}`,
                                 }
                             ]
                         })
                     }
-                    if (wallet.data[adress].transactions[2] !== undefined) {
+                    if (wallet.data[address].transactions[2] !== undefined) {
                         // Fetch 3rd transaction
-                        await fetch(`https://api.blockchair.com/${i.values[0]}/dashboards/transaction/${wallet.data[adress].transactions[2]}`).then(async res => {
+                        await fetch(`https://api.blockchair.com/${i.values[0]}/dashboards/transaction/${wallet.data[address].transactions[2]}`).then(async res => {
                             let trans3 = await res.json();
                             transactions = [
                                 ...transactions,
                                 {
-                                    block_id: `${trans3.data[wallet.data[adress].transactions[2]].transaction.block_id}`,
-                                    amount: `${trans3.data[wallet.data[adress].transactions[2]].transaction.input_total / 100000000}`,
-                                    amount_usd: `${trans3.data[wallet.data[adress].transactions[2]].transaction.input_total_usd}`,
-                                    fee: `${trans3.data[wallet.data[adress].transactions[2]].transaction.fee}`,
+                                    block_id: `${trans3.data[wallet.data[address].transactions[2]].transaction.block_id}`,
+                                    amount: `${trans3.data[wallet.data[address].transactions[2]].transaction.input_total / 100000000}`,
+                                    amount_usd: `${trans3.data[wallet.data[address].transactions[2]].transaction.input_total_usd}`,
+                                    fee: `${trans3.data[wallet.data[address].transactions[2]].transaction.fee}`,
                                 }
                             ]
                             await interaction.editReply({
                                 embeds: [
                                     new MessageEmbed()
                                         .setAuthor({ name: interaction.user.username, iconURL: interaction.user.displayAvatarURL({ format: 'png', size: 2048, dynamic: true }) })
-                                        .setColor('68ff00')
+                                        .setColor('#68ff00')
                                         .addFields(
                                             {
                                                 name: `ℹ️ Info`,
-                                                value: `**\`Balance: ${wallet.data[adress].address.balance}\` ${interaction.client.emojis.cache.find(emoji => emoji.name === i.values[0])} \`(${wallet.data[adress].address.balance_usd} USD\`**`
+                                                value: `**\`Balance: ${wallet.data[address].address.balance} ${i.values[0].replace(i.values[0][0], i.values[0][0].toUpperCase())} ($${wallet.data[address].address.balance_usd})\`**`
                                             },
                                             {
                                                 name: '\u200B',
@@ -203,7 +195,7 @@ export default {
                                             },
                                             transactions[0] !== undefined ? {
                                                 name: '✨ 1 Transaction',
-                                                value: `**\`Block id: ${transactions[0].block_id}\`**\n**\`Amount: ${transactions[0].amount} ${interaction.client.emojis.cache.find(emoji => emoji.name === i.values[0])} (${transactions[0].amount_usd} USD)\`**\n**\`Fee: ${transactions[0].fee} ${interaction.client.emojis.cache.find(emoji => emoji.name === i.values[0])}**`,
+                                                value: `**\`Block id: ${transactions[0].block_id}\`**\n**\`Amount: ${transactions[0].amount} ${i.values[0].replace(i.values[0][0], i.values[0][0].toUpperCase())} ($${transactions[0].amount_usd})\`**\n**\`Fee: ${transactions[0].fee/1000000} ${i.values[0].replace(i.values[0][0], i.values[0][0].toUpperCase())}**`,
                                                 inline: true
                                             } : false,
                                             transactions[1] !== undefined ? {

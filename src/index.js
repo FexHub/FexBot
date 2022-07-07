@@ -18,12 +18,12 @@ client.once("ready", async () => {
     file = logs.createLogs(new Date());
     console.log(`\x1b[38;5;49m[✅   | Info] | We're glad to see you, ${client.user.username}!\x1b[0m`);
     logs.writeLogs(file, 'Bot successfull logged in.', new Date().toLocaleDateString(), new Date().toLocaleTimeString(), '[✅  | Info]');
-    deploy(client, 'guild');
+    await deploy(client, 'guild');
 })
 
 // Interaction created event
 client.on("interactionCreate", async (interaction) => {
-    if (interaction.isAutocomplete()) autocomplete(interaction);
+    if (interaction.isAutocomplete()) await autocomplete(interaction);
     if (!interaction.isCommand()) return;
 
     const command = client.commands.get(interaction.commandName);

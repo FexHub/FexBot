@@ -10,7 +10,7 @@ async function autocomplete(interaction) {
                 value: interaction.options.getFocused()
             }])
         } catch (err) {
-            console.log(`\x1b[38;5;197m[❌  | Logs] | User ${interaction.user.username} caught error in command \x1b[36m${interaction.commandName}.\x1B[0m\n${error}`)
+            console.log(`\x1b[38;5;197m[❌  | Logs] | User ${interaction.user.username} caught error in command \x1b[36m${interaction.commandName}.\x1B[0m\n${err}`)
         }
     }
 }
