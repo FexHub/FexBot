@@ -11,7 +11,7 @@
 - [About](#About)
 - [Installation](#Installation)
     - [Requirements](#Requirements)
-    - [Install](#Install)
+    - [Install Steps](#Install-Steps)
 - [Contribution](#Contribution)
 - [Help](#Help)
 
@@ -22,7 +22,7 @@
 ## Installation
 ### Requirements
 **This bot was made using [Node.js](https://nodejs.org/en/), so you will need [Node.js](https://nodejs.org/en/) installed on your PC for the bot to work. We recommend using the latest available version** 🙂
-### Install
+### Install Steps
 `1.` Clone the repository using `git clone https://github.com/FexHub/FexBot.git` <br>
 `2.` Install modules using `npm i` <br>
 `3.` Set up the config in the `config.json` file <br>
@@ -30,7 +30,7 @@
 `5.` Ready! 😏
 
 ## Contribution
-If you would like to contribute your idea, fix, etc. - create a Pull request! However, please note that each request is checked 😌
+If you would like to contribute your idea, fix, etc. - create a **Pull request**! However, please note that each request is checked 😌
 
 ## Help
 If you have any problems with the use of the bot or with its installation - fell free to contact our server in **[Discord](https://discord.gg/tn8uz2Pf)** 👌
