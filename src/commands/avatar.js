@@ -17,7 +17,7 @@ export default {
             embeds: [
                 new MessageEmbed()
                     .setAuthor({ name: interaction.user.username, iconURL: interaction.user.displayAvatarURL({ format: 'png', size: 2048, dynamic: true }) })
-                    .setColor('68ff00')
+                    .setColor('#68ff00')
                     .setTitle(interaction.options.getMentionable('user') ? `${interaction.options.getMentionable('user').user.username} avatar` : 'Your avatar')
                     .setImage(interaction.options.getMentionable('user') ? interaction.options.getMentionable('user').displayAvatarURL({ format: 'png', size: 2048, dynamic: true }) : interaction.user.displayAvatarURL({ format: 'png', size: 2048, dynamic: true }))
             ]
