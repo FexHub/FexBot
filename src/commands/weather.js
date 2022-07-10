@@ -30,9 +30,9 @@ export default {
                     .setColor('#68ff00')
                     .setTitle(result.weather[0].main)
                     .addFields(
-                        { name: '🌡️ Temperature', value: `**\`${result.main.temp}°C\`**`, inline: true },
-                        { name: '💧 Humidity', value: `**\`${result.main.humidity}%\`**`, inline: true },
-                        { name: '💨 Wind', value: `**\`${result.wind.speed} m/s\`**`, inline: true },
+                        { name: '🌡️ Temperature', value: `${result.main.temp}°C`, inline: true },
+                        { name: '💧 Humidity', value: `${result.main.humidity}%`, inline: true },
+                        { name: '💨 Wind', value: `${result.wind.speed} m/s`, inline: true },
                     )
                     .setThumbnail(`https://openweathermap.org/img/wn/${result.weather[0].icon}@4x.png`)
             ]

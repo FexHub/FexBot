@@ -46,8 +46,8 @@ export default {
                                     emoji: '🇵🇱'
                                 },
                                 {
-                                    label: 'Russian',
-                                    description: 'Translate to Russian',
+                                    label: 'russian',
+                                    description: 'Translate to russian',
                                     value: 'ru',
                                     emoji: '🇷🇺'
                                 },
@@ -93,7 +93,8 @@ export default {
         const collector = reply.createMessageComponentCollector({ filter, max: 1 });
         collector.on('collect', async (i) => {
             // Translate text
-            const translated = await translate(interaction.options.getString('text'), { to: i.values[0] }).then(res => res.text);
+            let translated = await translate(interaction.options.getString('text'), { to: i.values[0] }).then(res => res.text);
+            translated = translated.length >= 950 ? `${translated.slice(0, 950)} and ${translated.length - 950 || 0} more` : `${translated}`;
             // Edit embed message
             await interaction.editReply({
                 embeds: [
@@ -102,10 +103,10 @@ export default {
                         .setColor('#68ff00')
                         .addFields(
                             {
-                                inline: true, name: '📜 Text', value: `**\`${interaction.options.getString('text')}\`**`
+                                name: '📜 Text', value: `${interaction.options.getString('text').length >= 950 ? `${interaction.options.getString('text').slice(0, 950)} and ${interaction.options.getString('text').length - 950 || 0} more` : `${interaction.options.getString('text')}`}`
                             },
                             {
-                                inline: true, name: '🗺️ Translated text', value: `**\`${translated}\`**`
+                                name: '🗺️ Translated text', value: `${translated}`
                             }
                         )
                 ], components: []

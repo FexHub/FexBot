@@ -42,4 +42,4 @@ client.on("interactionCreate", async (interaction) => {
 });
 
 // Login to bot account
-client.login(config.token);
+client.login(config.token).then(r => r);

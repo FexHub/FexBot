@@ -24,7 +24,7 @@ export default {
                 new MessageEmbed()
                     .setAuthor({ name: interaction.user.username, iconURL: interaction.user.displayAvatarURL({ format: 'png', size: 2048, dynamic: true }) })
                     .setColor('#68ff00')
-                    .setDescription(`**🏓 Pong!**\n**Client latency: \`${interaction.client.ws.ping} ms\`**\n**Discord API latency: \`${ping} ms\`**`)
+                    .setDescription(`**🏓 Pong!**\n**Client latency:** ${interaction.client.ws.ping} ms\n**Discord API latency:** ${ping} ms`)
             ]
         })
     }

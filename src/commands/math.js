@@ -30,8 +30,8 @@ export default {
                     .setAuthor({ name: interaction.user.username, iconURL: interaction.user.displayAvatarURL({ format: 'png', size: 2048, dynamic: true }) })
                     .setColor('#68ff00')
                     .addFields(
-                        { inline: true, name: '🧮 Expression', value: `**\`${interaction.options.getString('expression') || ' '}\`**` },
-                        { inline: true, name: '📈 Result', value: `**\`${result}\`**` }
+                        { inline: true, name: '🧮 Expression', value: `${interaction.options.getString('expression') || ' '}` },
+                        { inline: true, name: '📈 Result', value: `${result}` }
                     )
             ]
         })
