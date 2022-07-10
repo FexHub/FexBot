@@ -1,4 +1,5 @@
 node_modules
 src/logs/**
+!src/logs/example.txt
 src/files/**
 .idea
